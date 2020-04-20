@@ -231,9 +231,12 @@ function preload() {
   roboto = loadFont('./data/font/Roboto-Regular.ttf');
 
   //load ml5 models
-  charRNN_model1 = ml5.charRNN('models/woolf/', model1Ready);//Virigina Woolf model
-  charRNN_model2 = ml5.charRNN('models/woolf/', model2Ready);//Virigina Woolf model
-  charRNN_model3 = ml5.charRNN('models/woolf/', model3Ready);//Virigina Woolf model
+  //charRNN_model1 = ml5.charRNN('models/woolf/', model1Ready);//Virigina Woolf model
+  //charRNN_model2 = ml5.charRNN('models/woolf/', model2Ready);//Virigina Woolf model
+  //charRNN_model3 = ml5.charRNN('models/woolf/', model3Ready);//Virigina Woolf model
+  charRNN_model1 = ml5.charRNN('models/oldman/', model1Ready);//Old Man and the Sea JP model
+  charRNN_model2 = ml5.charRNN('models/oldman/', model2Ready);//Old Man and the Sea JP model
+  charRNN_model3 = ml5.charRNN('models/oldman/', model3Ready);//Old Man and the Sea JP model
   //charRNN_model1 = ml5.charRNN('models/jplyrics_heavy/', model1Ready);//JP lyrics model
   //charRNN_model2 = ml5.charRNN('models/oldman/', model2Ready);//Old Man and the Sea JP model
   //charRNN_model3 = ml5.charRNN('models/oldman/', model3Ready);//Old Man and the Sea JP model
