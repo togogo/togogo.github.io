@@ -1,0 +1,279 @@
+/*
+
+B U T T O N
+
+The button still has this weird effect when it first comes in...
+But maybe I can take care of that later.
+
+*/
+
+/*Will I need this?*/
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+#button {
+  display: inline-block;
+  font-family: 'Roboto';
+  /*font-size: 1.0em;*/
+  font-size: 15px;
+  font-weight: bold;
+  padding: 8px 20px;
+  background-color: #CC88FF; 
+  text-decoration: none;
+  outline: none;
+  color: #FFFFFF;
+  border-style: none;
+  border-radius: 10px;
+    -webkit-border-radius: 10px;/* for Safari and Chrome*/
+    -moz-border-radius: 10px;/* for Firefox*/
+}
+
+#button:hover {
+  background-color: #a46dcf; 
+}
+
+#button:active{
+  background-color: #8358a3; 
+}
+
+#button::before,
+#button::after {
+  position: absolute;
+  z-index: -1;
+  display: block;
+  content: '';
+}
+
+#button,
+#button::before,
+#button::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+
+
+
+/*
+
+T O G G L E 
+
+*/
+
+/*use this guy to regulate the position of the toggle button*/
+#toggle1{
+  position:absolute; top:95px; left:180px
+}
+
+#toggle2{
+  position:absolute; top:130px; left:180px
+}
+
+#toggle3{
+  position:absolute; top:165px; left:180px
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #CC88FF;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #CC88FF;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/*
+
+S L I D E R 
+
+*/
+
+#genLengthSlider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 5px;  
+  background: #ccc;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+#genLengthSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: #CC88FF;
+  cursor: pointer;
+}
+
+#genLengthSlider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #CC88FF;
+  cursor: pointer;
+}
+
+#genTempSlider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 5px;  
+  background: #ccc;
+  outline: none;
+  opacity: 1;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+#genTempSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: #CC88FF;
+  cursor: pointer;
+}
+
+#genTempSlider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #CC88FF;
+  cursor: pointer;
+}
+
+/*
+
+E N T R Y  A R E A 
+
+*/
+
+textarea{
+
+  background: transparent;
+  border: none;
+  font-size: 30px;
+}
+
+#entryArea{
+}
+
+/*How text is highlighted in the entry area*/
+::selection{
+  color: black;
+  background: yellow;
+}
+
+entryArea, select, textarea{
+  color: #ffffff;
+}
+
+textarea:focus, entryArea:focus{
+  color: #ffffff;
+  outline: none !important;
+}
+
+/*
+
+G E N .   A R E A 
+
+*/
+
+#generated1{
+  background: transparent;
+  color: magenta;
+  //font-family: "Times New Roman", Times, serif;
+  
+  //this part enables the text to be in gradation color
+  //color: #ACB6E5;
+  //background: -webkit-linear-gradient(0deg, yellow, magenta);
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+}
+
+#generated2{
+  background: transparent;
+  color: green;
+  //font-family: "Times New Roman", Times, serif;
+  
+  //this part enables the text to be in gradation color
+  //color: #ACB6E5;
+  //background: -webkit-linear-gradient(0deg, yellow, magenta);
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+}
+
+#generated3{
+  background: transparent;
+  color: orange;
+  //font-family: "Times New Roman", Times, serif;
+  
+  //this part enables the text to be in gradation color
+  //color: #ACB6E5;
+  //background: -webkit-linear-gradient(0deg, yellow, magenta);
+  //-webkit-background-clip: text;
+  //-webkit-text-fill-color: transparent;
+}
