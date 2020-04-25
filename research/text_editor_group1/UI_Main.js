@@ -262,6 +262,8 @@ function showGen1Status(_status){
   textFont(roboto);
   textSize(h3);
   fill(txt);
+  //fill(0);
+  //print(_status + "is what I'm dealing");
   text(_status, genArea1StatusX, genArea1StatusY);
 }
 
@@ -269,6 +271,8 @@ function showGen2Status(_status){
   textFont(roboto);
   textSize(h3);
   fill(txt);
+  //fill(0);
+  //print(_status + "is what I'm dealing");
   text(_status, genArea2StatusX, genArea2StatusY);
 }
 
@@ -276,5 +280,6 @@ function showGen3Status(_status){
   textFont(roboto);
   textSize(h3);
   fill(txt);
+  //fill(0);
   text(_status, genArea3StatusX, genArea3StatusY);
 }

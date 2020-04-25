@@ -3,6 +3,8 @@ let bg;//background color
 let panel;//panel color
 let txt;//text color
 let hl;//hairline color
+let loading;//when the model is still loading
+let ready;//when the model is completely loaded
 
 //UI arch...The big picture
 let verticalMargin = 40;
@@ -21,6 +23,11 @@ let h3 = 10;
 let charRNN_model1;
 let charRNN_model2;
 let charRNN_model3;
+
+//machine learning model states
+let model1isReady = false;
+let model2isReady = false;
+let model3isReady = false;
 
 //machine learning booleans
 let model1isLive;
@@ -172,6 +179,8 @@ function setup() {
   txt = color(255);//white text
   hl1 = color('505050');//dark gray line
   hl2 = color(255);//white line
+  loading = color(255, 0, 0);//edit the color to be nicer
+  ready = color(0, 255, 0);//edit the color to be nicer
 
   //setup for each of the subplots
   setupSideBar();
@@ -206,14 +215,17 @@ var params = function() {
 //run this when the model is properly loaded during setup
 function model1Ready() {
   print('Model 1 is loaded and is ready.');
+  model1isReady = true;
 }
 
 function model2Ready() {
   print('Model 2 is loaded and is ready.');
+  model2isReady = true;
 }
 
 function model3Ready() {
   print('Model 3 is loaded and is ready.');
+  model3isReady = true;
 }
 
 function preload() {
@@ -231,18 +243,16 @@ function preload() {
   roboto = loadFont('./data/font/Roboto-Regular.ttf');
 
   //load ml5 models
+  charRNN_model1 = ml5.charRNN('models/model_testing/5MB_64seq_512rnn_jplyrics', model1Ready);
+  charRNN_model2 = ml5.charRNN('models/model_testing/5MB_128seq_512rnn_jplyrics', model2Ready);
+  charRNN_model3 = ml5.charRNN('models/model_testing/20MB_128seq_512rnn_20epoch_jplyrics', model3Ready);
   //charRNN_model1 = ml5.charRNN('models/woolf/', model1Ready);//Virigina Woolf model
   //charRNN_model2 = ml5.charRNN('models/woolf/', model2Ready);//Virigina Woolf model
   //charRNN_model3 = ml5.charRNN('models/woolf/', model3Ready);//Virigina Woolf model
-  charRNN_model1 = ml5.charRNN('models/oldman/', model1Ready);//Old Man and the Sea JP model
-  charRNN_model2 = ml5.charRNN('models/oldman/', model2Ready);//Old Man and the Sea JP model
-  charRNN_model3 = ml5.charRNN('models/oldman/', model3Ready);//Old Man and the Sea JP model
   //charRNN_model1 = ml5.charRNN('models/jplyrics_heavy/', model1Ready);//JP lyrics model
   //charRNN_model2 = ml5.charRNN('models/oldman/', model2Ready);//Old Man and the Sea JP model
   //charRNN_model3 = ml5.charRNN('models/oldman/', model3Ready);//Old Man and the Sea JP model
 
-
-  //record();//this was for debugging purposes...record needs to be run once.
 }
 
 function draw() {
@@ -251,11 +261,14 @@ function draw() {
   background(bg);
   
   //for debugging purposes...
+  //print(charRNN_model1.ready);
   //print(keyCode);
   //print(timerCountdown);
   //print(timestamp());
   //test if the record is working or not
   //record();//nope
+  fill(255, 0, 0);
+  //text("yo000000000000000000yo", 1000, 100);
 
   //ui ... sidebar
   drawSideBar();
@@ -269,23 +282,34 @@ function draw() {
   //Top ... Logo
   //image(logo, 100, 100, logo.width*logoPerc, logo.height*logoPerc);
 
+  //ui .... main
+  showGenAreaStatus();
+  
+  //print(genArea1isWorking);
+  
+
+  //testing the use of dat.gui
+  //print(gui.showTest);
+  //print(mainParams.showTest);//this is how you access it!
+  //print(mainGUi.name);
+}
+
+
+function showGenAreaStatus(){
   //to show the genration status and feedback...could be written better
   if (genArea1isWorking == true) {
+    //print("area 1 is working");
     showGen1Status(genArea1StatWorking);
   }
 
   if (genArea2isWorking == true) {
+    //print("area 2 is working");
     showGen2Status(genArea2StatWorking);
   }
 
   if (genArea3isWorking == true) {
     showGen3Status(genArea3StatWorking);
   }
-
-  //testing the use of dat.gui
-  //print(gui.showTest);
-  //print(mainParams.showTest);//this is how you access it!
-  //print(mainGUi.name);
 }
 
 //need this to dynamically resize canvas
@@ -332,9 +356,9 @@ function keyPressed() {
 }
 
 
+
 function genBtnPressed() {
   print('Gen button was pressed.');
-  print(getSelectionText());
   genStart();
   captureGenInfo();//
   //print(genInfo);//for debugging purposes...
@@ -386,6 +410,7 @@ if (model2isLive == true) {
 }
 if (model3isLive == true) {
   genArea3isWorking = true;
+
   charRNN_model3.generate(data, gotData3);
   print("Model 3 is trying to generate something...");
 }
@@ -396,7 +421,6 @@ function gotData1(err, result) {
   genArea1isWorking = false;
   genArea1.value(result.sample);
   captureGenText(genArea1.value(), 1);
-  //print(genArea1.value());//would this work?...yes it does work.
 }
 
 function gotData2(err, result) {

@@ -35,6 +35,15 @@ let mdl2TxtY = 150;
 let mdl3TxtX = 55;
 let mdl3TxtY = 185;
 
+//Sidebar ... model status
+let mdlStatRad = 5;//radius of the model status
+let mdl1StatX = 100;
+let mdl1StatY = mdl1TxtY - 3;
+let mdl2StatX = 100;
+let mdl2StatY = mdl2TxtY - 3;
+let mdl3StatX = 100;
+let mdl3StatY = mdl3TxtY - 3;
+
 //Sidebar...hairline
 let sidebarHairlineX1 = 19;
 let sidebarHairlineY1 = 300;
@@ -119,10 +128,10 @@ let testBtnCopy2 = 'Done';
 let testBtnX = 19;
 let testBtnY = 620;
 
-//let defaultTimer = 15*60;//15 min in seconds
-//let count = 15*60;//15 min in seconds
-let count = 15;//for debugging purposes
-let defaultTimer = 15;
+let defaultTimer = 15*60;//15 min in seconds
+let count = 15*60;//15 min in seconds
+//let count = 15;//for debugging purposes
+//let defaultTimer = 15;
 let counter;
 let timerX = 195;
 let timerY = 640;
@@ -229,7 +238,41 @@ function drawSideBar(){
   //User test section
   userTestSection();
   
+  //for checking the model loading status
+  modelStatus();
+  
  
+}
+
+//shows red when the model is not completely loaded. turns green when it is ready
+function modelStatus(){
+  
+  //model1
+  if(model1isReady == false){
+  fill(loading);
+  } else {
+    fill(ready);
+  }
+  noStroke();
+  ellipse(mdl1StatX, mdl1StatY, mdlStatRad, mdlStatRad);
+  
+  //model2
+  if(model2isReady == false){
+  fill(loading);
+  } else {
+    fill(ready);
+  }
+  noStroke();
+  ellipse(mdl2StatX, mdl2StatY, mdlStatRad, mdlStatRad);
+  
+  //model3
+  if(model3isReady == false){
+  fill(loading);
+  } else {
+    fill(ready);
+  }
+  noStroke();
+  ellipse(mdl3StatX, mdl3StatY, mdlStatRad, mdlStatRad);
 }
 
 
